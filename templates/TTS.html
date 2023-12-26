@@ -200,7 +200,7 @@
         console.log("Request Data:", formData);
 
         // 发起 POST 请求到语音合成 API
-        fetch("https://u88432-8972-55ac6960.westb.seetacloud.com:8443/tts", {
+        fetch("https://u88432-a3a8-4b387337.westb.seetacloud.com:8443/tts", {
             method: "POST", // 使用 POST 方法
             body: formData // 将 FormData 对象作为请求体
         })
@@ -209,21 +209,29 @@
                 // 如果响应状态码为 OK
                 return response.blob(); // 将响应转换为 Blob 对象
             } else {
-                throw new Error("Network response was not ok.");
+                throw new Error("网络响应不正常。");
             }
         })
         .then(blobData => {
             // 处理成功的响应，更新页面元素显示结果信息
-            console.log("Received WAV data:", blobData); // 打印响应数据到控制台
+            console.log("收到的 WAV 数据:", blobData); // 打印响应数据到控制台
 
             // 获取下载按钮和按钮状态
             const downloadLink = document.getElementById("downloadLink");
             const downloadButton = document.getElementById("downloadButton");
-
         
             // 将 Blob 对象设置为音频播放器的源
             const audioPlayer = document.getElementById("audioPlayer");
             const audioSource = document.getElementById("audioSource");
+            
+            // Save the Blob data in sessionStorage
+            const fileName = 'audio_file.wav'; // Specify the file name
+            sessionStorage.setItem(fileName, JSON.stringify(blobData));
+
+
+            audioPlayer.src = URL.createObjectURL(blobData);
+            console.log("audioPlayer:", audioPlayer.src)
+
             audioSource.src = URL.createObjectURL(blobData);
             console.log("audioSource:", audioSource.src)
         
@@ -232,7 +240,7 @@
             document.getElementById("downloadLink").style.display = "block";
         
             // 将 Blob 对象设置为下载链接的 href
-            downloadLink.href = URL.createObjectURL(blobData);
+            downloadLink.href = audioSource.src;
             
             // 根据后端返回的状态设置按钮样式和状态
             downloadLink.classList.add("active");
