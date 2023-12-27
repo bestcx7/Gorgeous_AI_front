@@ -301,11 +301,11 @@
 
             <!-- 侧边栏导航链接 -->
             <div class="nav-left">
-                <a href="#home"><span class="ion-ios-home-outline"></span> Home</a>
-                <a href="#alarm"><span class="ion-ios-list-outline"></span> Alarm</a>
-                <a href="#compose"><span class="ion-ios-compose-outline"></span> Compose</a>
-                <a href="#chats"><span class="ion-ios-chatboxes-outline"></span> Chats</a>
-                <a href="#profile"><span class="ion-ios-person-outline"></span> Profile</a>
+                <a href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/"><span class="ion-ios-home-outline"></span> 穿你想穿的任何衣服</a>
+                <a href="https://yiyan.baidu.com/"><span class="ion-ios-list-outline"></span> 百度文心一言大模型</a>
+                <a href="https://www.baichuan-ai.com/"><span class="ion-ios-compose-outline"></span> 百川大模型</a>
+                <a href="https://xinghuo.xfyun.cn/desk"><span class="ion-ios-chatboxes-outline"></span> 讯飞星火大模型</a>
+                <a href="https://agents.baidu.com/agent/3ebf0333d6034259a73ec777319de5dc/preview"><span class="ion-ios-person-outline"></span> 百度灵境矩阵</a>
                 <a href="#settings"><span class="ion-ios-gear-outline"></span> Settings</a>
                 <a href="#credits"><span class="ion-ios-information-outline"></span> Credits</a>
             </div>
@@ -384,76 +384,7 @@
                         $(this).removeClass("fadeIn").addClass("fadeOut");
                     });
                 },
-                // 处理导航事件
-                navigation: function () {
-                    // 当点击或触摸导航左侧的链接时执行
-                    $(".nav-left a").on("touchstart click", function (e) {
-                        e.preventDefault();
-                        // 获取链接的目标（去除 # 符号）
-                        var target = $(this).attr("href").replace("#", "");
-                        // 切换侧边栏的可见状态
-                        $(".sidebar").toggleClass("active");
-                        // 隐藏所有页面内容
-                        $(".html").removeClass("visible");
-
-                        // 根据目标判断显示哪个页面
-                        if (target == "home" || target == "" || target == null) {
-                            $(".html.welcome").addClass("visible");
-                        } else {
-                            $(".html." + target).addClass("visible");
-                        }
-
-                        // 设置页面标题
-                        App.title($(this).text());
-                    });
-                }
             },
-            // 搜索栏相关功能
-            search: {
-                bar: function() {
-                    $(".header .ion-ios-search").on("touchstart click", function() {
-                        var inputValue = $(".header .search input").val();
-                        return "" != inputValue && null != inputValue
-                            ? (App.search.html($(".header .search input").val()), !1)
-                            : ($(".nav").removeClass("active"),
-                            $(".header .search input").focus(),
-                            void $(".header .search input").toggleClass("search-visible"));
-                    });
-        
-                    $(".search form").on("submit", function(e) {
-                        e.preventDefault();
-                        App.search.html($(".header .search input").val());
-                    });
-                },
-                // 处理搜索结果
-                html: function(query) {
-                    $(".search input").removeClass("search-visible");
-                    $(".html").removeClass("visible");
-                    $(".html.search").addClass("visible");
-                    App.title("Result");
-                    $(".html.search").html($(".html.search").html());
-                    $(".html.search .key").html(query);
-                    $(".header .search input").val("");
-                }
-            },
-            // 处理主导航事件
-            navigation: function() {
-                $(".nav .mask").on("touchstart click", function(e) {
-                    e.preventDefault();
-                    $(this).parent().toggleClass("active");
-                });
-            },
-            // 处理超链接点击事件
-            hyperlinks: function() {
-                $(".nav .nav-item").on("click", function(e) {
-                    e.preventDefault();
-                    var target = $(this).attr("href").replace("#", "");
-                    $(".html").removeClass("visible");
-                    $(".html." + target).addClass("visible");
-                    $(".nav").toggleClass("active");
-                    App.title($(this).text());
-                });
-            }
         };
 
     </script>
