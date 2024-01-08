@@ -162,7 +162,18 @@
         
         
         /* 侧边栏左侧导航链接样式 */
-        .sidebar .sidebar-content .nav-left>a {
+        .sidebar .sidebar-content .nav-left .dropdown>a {
+            color: #333;
+            display: block;
+            font-size: 16px;
+            padding: 10px 0;
+            line-height: 24px;
+            vertical-align: top;
+            text-decoration: none;
+        }
+
+        /* 侧边栏左侧导航链接样式 */
+        .sidebar .sidebar-content .nav-left .dropdown .dropdown-content>a {
             color: #333;
             display: block;
             font-size: 16px;
@@ -180,67 +191,33 @@
             display: inline-block;
         }
         
-        /* 设置一组元素的顶部外边距为50px */
-        .html.chats,
-        .html.search,
-        .html.compose,
-        .html.credits,
-        .html.settings,
-        .html.welcome {
-            margin-top: 50px;
-        }
-
-        /* 将类名为on-off的元素隐藏 */
-        .on-off {
+        /* 初始状态下拉栏隐藏 */
+        .dropdown-content {
             display: none;
-        }
-
-        /* 对紧跟在on-off元素后的label元素进行样式设置 */
-        .on-off+label {
-            width: 30px;
-            height: 10px;
-            position: relative;
-            border-radius: 5px;
-            background: #dedee0;
-            display: inline-block;
-            transition: all .3s ease-in-out 0s;
-        }
-
-        /* 对紧跟在on-off元素后的label元素的伪元素进行样式设置 */
-        .on-off+label:after {
-            left: 0;
-            top: -2px;
-            width: 15px;
-            content: '';
-            height: 15px;
             position: absolute;
-            border-radius: 50%;
-            background: #bebdc2;
-            transition: all .3s ease-in-out 0s;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
 
-        /* 对选中状态的on-off元素后的label元素进行样式设置 */
-        .on-off:checked+label {
-            background: #fd99b3;
+        /* 下拉栏链接样式 */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
         }
 
-        /* 对选中状态的on-off元素后的label伪元素进行样式设置 */
-        .on-off:checked+label:after {
-            left: 15px;
-            background: #fb3666;
+        /* 鼠标悬停时改变背景颜色 */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
         }
 
-        /* 设置.btn元素的样式 */
-        .btn {
-            color: #eee;
-            width: 100%;
-            border: none;
-            font-size: 16px;
-            padding: 12px 24px;
-            background: #cf0e3f;
-            border-radius: 30px;
+        /* 下拉栏可见时显示 */
+        .show {
+            display: block;
         }
-
 
         /* 设置model-section的样式 */
         .model-section {
@@ -298,16 +275,25 @@
     <div class="sidebar">
         <div class="sidebar-overlay"></div>
         <div class="sidebar-content">
-
-            <!-- 侧边栏导航链接 -->
             <div class="nav-left">
-                <a href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/"><span class="ion-ios-home-outline"></span> 穿你想穿的任何衣服</a>
-                <a href="https://yiyan.baidu.com/"><span class="ion-ios-list-outline"></span> 百度文心一言大模型</a>
-                <a href="https://www.baichuan-ai.com/"><span class="ion-ios-compose-outline"></span> 百川大模型</a>
-                <a href="https://xinghuo.xfyun.cn/desk"><span class="ion-ios-chatboxes-outline"></span> 讯飞星火大模型</a>
-                <a href="https://agents.baidu.com/agent/3ebf0333d6034259a73ec777319de5dc/preview"><span class="ion-ios-person-outline"></span> 百度灵境矩阵</a>
-                <a href="https://tongyi.aliyun.com/qianwen/"><span class="ion-ios-gear-outline"></span> 通义千问</a>
-                <a href="#credits"><span class="ion-ios-information-outline"></span> Credits</a>
+                <div class="dropdown">
+                    <a href="#"><span class="ion-ios-list-outline"></span> 大模型</a>
+                    <div class="dropdown-content">
+                        <a href="https://yiyan.baidu.com/">百度文心一言</a>
+                        <a href="https://www.baichuan-ai.com/">百川</a>
+                        <a href="https://xinghuo.xfyun.cn/desk">讯飞星火</a>
+                        <a href="https://tongyi.aliyun.com/qianwen/">通义千问</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#"><span class="ion-ios-chatboxes-outline"></span> 生成图片</a>
+                    <div class="dropdown-content">
+                        <a href="https://agents.baidu.com/agent/3ebf0333d6034259a73ec777319de5dc/preview">百度灵境矩阵</a>
+                        <a href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/">穿你想穿的任何衣服</a>
+                        <a href="https://tongyi.aliyun.com/wanxiang/square">通义万相</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -343,7 +329,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(function() {
-            // 初始化应用
             App.init();
         });
 
@@ -374,7 +359,7 @@
                         // 切换侧边栏的遮罩动画效果
                         $(".sidebar .sidebar-overlay").removeClass("fadeOut animated").addClass("fadeIn animated");
                     });
-
+            
                     // 当点击或触摸侧边栏的遮罩层时执行
                     $(".sidebar .sidebar-overlay").on("touchstart click", function (e) {
                         e.preventDefault();
@@ -383,10 +368,16 @@
                         // 切换遮罩层的淡入淡出动画效果
                         $(this).removeClass("fadeIn").addClass("fadeOut");
                     });
+            
+                    // 添加下拉栏的切换逻辑
+                    $(".dropdown a").on("click", function (e) {
+                        e.preventDefault();
+                        // 切换下拉栏的可见状态
+                        $(this).siblings(".dropdown-content").toggleClass("show");
+                    });
                 },
             },
-        };
-
+        }
     </script>
 </body>
 </html>
