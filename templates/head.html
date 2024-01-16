@@ -7,7 +7,14 @@
     <!-- Bootstrap 的 CSS 文件 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Gorgeous AI</title>
+    <link rel="icon" href="/static/logo.png">
     <style>
+        /* 取消按钮点击后的边框 */
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
         /* 设置整个页面的样式，包括背景图片 */
         body {
             font-family: 'Arial', sans-serif;
@@ -17,47 +24,14 @@
             background-attachment: fixed; /* 使背景图片固定，不随页面滚动 */
         }
 
-        /* 设置model-section的样式 */
-        .model-section {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column; /* 修改为垂直方向 */
-            align-items: center; /* 居中对齐子元素 */
-            overflow-y: auto; /* 允许垂直滚动 */
-            white-space: nowrap;
+        .accordion-button:not(.collapsed) {
+            background-color: inherit; /* 或者设置为透明 */
+            color: inherit;
+            box-shadow: none;
         }
 
-        /* 设置每个model-item的样式 */
-        .model-item {
-            flex: 0 0 auto; /* 不拉伸，不收缩，宽度自动 */
-            margin-bottom: 100px; /* 调整模型项之间的底边距 */
-        }
-
-        img {
-            width: 400px; /* 设置图片宽度 */
-            height: 400px; /* 设置图片高度 */
-            object-fit: cover; /* 缩放图片以适应容器，保持宽高比 */
-            border-radius: 80px; /* 使用相对单位调整边角半径，相对于图片尺寸的百分比 */
-        }
-
-        .model-info {
-            background-color: transparent; /* 设置背景颜色为透明 */
-            margin-left: 10px;
-            font-size: 30px;
-            text-align: left; /* 居中显示文本 */
-            white-space: nowrap; /* 防止文本换行 */
-        }
-
-        .btn-enter {
-            margin-top: 20px; /* 调整按钮上边距 */
-            padding: 20px 50px; /* 调整按钮内边距 */
-            background-color: #0066cc; /* 设置背景颜色为蓝色 */
-            color: white; /* 设置文字颜色为白色 */
-            border: none; /* 去掉边框 */
-            font-size: 20px;
-            border-radius: 50px; /* 使用相对单位调整边角半径，相对于按钮尺寸的百分比 */
-            cursor: pointer; /* 设置鼠标样式为手型 */
-            text-decoration: none; /* 去掉文本装饰（下划线）*/
+        .card-text-light {
+            color: #c1bcbc; /* 这里可以设置你想要的淡色文字颜色 */
         }
     </style>
 </head>
@@ -66,7 +40,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Gorgeous AI</a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                 </svg>
@@ -76,34 +50,41 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="fw-bold">大模型</span>
-                    </a>
-                    <ul class="dropdown-menu border-0">
-                    <li><a class="dropdown-item" href="https://yiyan.baidu.com/">百度文心一言</a></li>
-                    <li><a class="dropdown-item" href="https://www.baichuan-ai.com/">百川大模型</a></li>
-                    <li><a class="dropdown-item" href="https://npc.baichuan-ai.com/index#AppScenarios">百川角色大模型</a></li>
-                    <li><a class="dropdown-item" href="https://tongyi.aliyun.com/qianwen/">通义千问</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">更多模型很快到来</a></li>
-                    </ul>
-                </li>
-
-                <hr class="dropdown-divider">
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="fw-bold">图片生成模型</span>
-                    </a>
-                    <ul class="dropdown-menu border-0">
-                    <li><a class="dropdown-item" href="https://agents.baidu.com/agent/3ebf0333d6034259a73ec777319de5dc/preview">百度灵境矩阵</a></li>
-                    <li><a class="dropdown-item" href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/">穿你想穿的任何衣服</a></li>
-                    <li><a class="dropdown-item" href="https://tongyi.aliyun.com/wanxiang/">通义万相</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">更多模型很快到来</a></li>
-                    </ul>
-                </li>
+                    <div class="accordion accordion-flush" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+                                    <span class="fw-bold">大模型</span>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <a class="dropdown-item mb-2" href="https://yiyan.baidu.com/">百度文心一言</a>
+                                    <a class="dropdown-item mb-2" href="https://www.baichuan-ai.com/">百川大模型</a>
+                                    <a class="dropdown-item mb-2" href="https://npc.baichuan-ai.com/index#AppScenarios">百川角色大模型</a>
+                                    <a class="dropdown-item mb-2" href="https://tongyi.aliyun.com/qianwen/">通义千问</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion accordion-flush" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" >
+                                    <span class="fw-bold">图片生成模型</span>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <a class="dropdown-item mb-2" href="https://agents.baidu.com/agent/3ebf0333d6034259a73ec777319de5dc/preview">百度灵境矩阵</a>
+                                    <a class="dropdown-item mb-2" href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/">穿你想穿的任何衣服</a>
+                                    <a class="dropdown-item mb-2" href="https://tongyi.aliyun.com/wanxiang/">通义万相</a>
+                                    <a class="dropdown-item mb-2" href="https://modelscope.cn/studios/CVstudio/cv_human_portrait/summary">FaceChain人物写真生成</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
                 </ul>
             <!--
             <form class="d-flex" role="search">
@@ -115,33 +96,47 @@
         </div>
         </nav>
 
-    <section class="model-section" id="modelSection">
-        <div class="model-item">
-            <img src="/static/baichuan.jpg" alt="Model 1">
-            <div class="model-info">
-                <p>百川角色大模型</p>
-                <a href="https://npc.baichuan-ai.com/index#AppScenarios" class="btn-enter">开始使用</a>
+    <div class="card-group mx-auto mb-4 " style="max-width: 100%;">
+        <div class="card text-end mx-3 mb-4" style="width: 90%; border-radius: 30px;">
+            <img src="/static/baichuan.jpg" class="card-img-top" style="object-fit: cover; height: 200px; border-radius: 30px 30px 0 0;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">百川角色大模型</h5>
+                <p class="card-text card-text-light">可以扮演任何角色的人工智能模型</p>
+                <a href="https://npc.baichuan-ai.com/index#AppScenarios" class="btn btn-primary">开始使用</a>
             </div>
-        </div> 
-
-        <div class="model-item">
-            <img src="/static/dress.jpeg" alt="Model 1">
-            <div class="model-info">
-                <p>穿你想穿的任何衣服</p>
-                <a href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/" class="btn-enter">开始使用</a>
-            </div>    
         </div>
 
-        <div class="model-item">
-            <img src="/static/more.jpeg" alt="Model 1">
-            <div class="model-info">
-                <p>更多模型很快到来</p>
-                <a class="btn-enter">敬请期待</a>
-            </div>    
+        <div class="card text-end mx-3 mb-4" style="width: 90%; border-radius: 30px;">
+            <img src="/static/trump.png" class="card-img-top" style="object-fit: cover; height: 200px; border-radius: 30px 30px 0 0;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">FaceChain人物写真生成</h5>
+                <p class="card-text card-text-light">定制任何人脸的写真图片</p>
+                <a href="https://modelscope.cn/studios/CVstudio/cv_human_portrait/summary" class="btn btn-primary">开始使用</a>
+            </div>
         </div>
+        
+        <div class="card text-end mx-3 mb-4" style="width: 90%; border-radius: 30px;">
+            <img src="/static/dress.jpeg" class="card-img-top" style="object-fit: cover; height: 200px; border-radius: 30px 30px 0 0;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">穿任何衣服</h5>
+                <p class="card-text card-text-light">让模特穿上任何衣服</p>
+                <a href="https://modelscope.cn/studios/DAMOXR/OutfitAnyone/summary/" class="btn btn-primary">开始使用</a>
+            </div>
+        </div>
+    </div>
 
-        <!-- Add more model items as needed -->
-    </section>
+    <!--
+    <div class="card-group mx-auto mb-4 " style="max-width: 100%;"></div>
+        <div class="card text-end mx-3 mb-4" style="width: 90%; border-radius: 30px;">
+            <img src="/static/more.jpeg" class="card-img-top" style="object-fit: cover; height: 200px; border-radius: 30px 30px 0 0;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">更多模型很快到来</h5>
+                <p class="card-text card-text-light">很快就会加入更多更先进的AI模型</p>
+                <a href="#" class="btn btn-primary">敬请期待</a>
+            </div>
+        </div>
+    </div>
+    -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
