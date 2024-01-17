@@ -9,25 +9,32 @@
     <title>Gorgeous AI</title>
     <link rel="icon" href="/static/logo.png">
     <style>
-        /* 取消按钮点击后的边框 */
         .navbar-toggler:focus {
             outline: none;
             box-shadow: none;
         }
 
-        /* 设置整个页面的样式，包括背景图片 */
         body {
             font-family: 'Arial', sans-serif;
             background-image: radial-gradient(ellipse at 95% 95%, #66aaff, #FFFFFF 70%, #ffffcc, #ff99cc);/* 添加背景图片的路径 */
-            background-size: cover; /* 调整背景图片的大小以覆盖整个页面 */
-            background-repeat: no-repeat; /* 防止背景图片重复显示 */
-            background-attachment: fixed; /* 使背景图片固定，不随页面滚动 */
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
         }
 
-        .accordion-button:not(.collapsed) {
-            background-color: inherit; /* 或者设置为透明 */
-            color: inherit;
-            box-shadow: none;
+        h1 {
+            font-weight: bold;
+            text-align: center;
+            font-family: "Microsoft YaHei", sans-serif; 
+            font-size: 40px; 
+        }
+
+        h6 {
+            text-align: center;
+            font-family: "Microsoft YaHei", sans-serif; 
+            font-size: 20px; 
+            color: #999; /* 淡色的字体颜色，你可以根据需要调整颜色值 */
+            margin: 0 20px; /* 设置页面两边的距离，根据需要调整 */
         }
 
         .card-text-light {
@@ -39,7 +46,10 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-transparent">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Gorgeous AI</a>
+            <a class="navbar-brand" href="#">
+                <img src="/static/logo.png" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
+                Gorgeous AI
+            </a>
             <button class="navbar-toggler border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
@@ -49,7 +59,7 @@
                 </svg>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <div class="accordion accordion-flush" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -57,7 +67,7 @@
                                     <span class="fw-bold">大模型</span>
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <a class="dropdown-item mb-2" href="https://yiyan.baidu.com/">百度文心一言</a>
                                     <a class="dropdown-item mb-2" href="https://www.baichuan-ai.com/">百川大模型</a>
@@ -94,7 +104,10 @@
             -->
             </div>
         </div>
-        </nav>
+    </nav>
+
+    <h1>AI工具箱</h1>
+    <h6>把所有的“最新”和“最强的”的AI工具和他们的使用说明都放进一个工具箱之内</h6>
 
     <div class="card-group mx-auto mb-4 " style="max-width: 100%;">
         <div class="card text-end mx-3 mb-4" style="width: 90%; border-radius: 30px;">
